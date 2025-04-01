@@ -20,7 +20,7 @@ function setup() {
     socket.on('message', (data) => {
         console.log(`Received message: ${data}`);
         let parsedData = JSON.parse(data);
-        if (parsedData.type === 'touch') {
+        if (parsedData && parsedData.type === 'touch') {
             circleX = parsedData.x;
             circleY = parsedData.y;
         }
