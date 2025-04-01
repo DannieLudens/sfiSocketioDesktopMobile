@@ -41,7 +41,7 @@ function touchMoved() {
         let dx = abs(mouseX - lastTouchX);
         let dy = abs(mouseY - lastTouchY);
 
-        if (dx > threshold || dy > threshold) {
+        if (dx > threshold || dy > threshold || lastTouchX === null) {
             let touchData = {
                 type: 'touch',
                 x: mouseX,
