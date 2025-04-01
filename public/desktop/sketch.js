@@ -19,10 +19,14 @@ function setup() {
     // Recibir mensaje del servidor
     socket.on('message', (data) => {
         console.log(`Received message: ${data}`);
-        let parsedData = JSON.parse(data);
-        if (parsedData && parsedData.type === 'touch') {
-            circleX = parsedData.x;
-            circleY = parsedData.y;
+        try {
+            let parsedData = JSON.parse(data);
+            if (parsedData && parsedData.type === 'touch') {
+                circleX = parsedData.x;
+                circleY = parsedData.y;
+            }
+        } catch (e) {
+            console.error("Error parsing received JSON:", e);
         }
     });    
 
