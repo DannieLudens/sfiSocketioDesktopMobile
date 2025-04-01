@@ -5,7 +5,7 @@ const port = 3000;
 
 
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(300, 400);
     background(220);
 
     //let socketUrl = 'http://localhost:3000';
