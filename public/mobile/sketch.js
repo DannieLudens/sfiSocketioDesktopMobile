@@ -1,5 +1,4 @@
 let socket;
-const port = 3000;
 let lastTouchX = null; 
 let lastTouchY = null; 
 const threshold = 5;
