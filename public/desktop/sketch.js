@@ -1,36 +1,34 @@
 let socket;
 let circleX = 200;
 let circleY = 200;
-const port = 3000;
-
+let circleColor = [255, 0, 0]; // color inicial rojo
 
 function setup() {
     createCanvas(300, 400);
     background(220);
 
-    //let socketUrl = 'http://localhost:3000';
-    socket = io(); 
+    socket = io();
 
-    // Evento de conexión exitosa
     socket.on('connect', () => {
         console.log('Connected to server');
     });
 
-    // Recibir mensaje del servidor
     socket.on('message', (data) => {
         console.log(`Received message: ${data}`);
         try {
             let parsedData = JSON.parse(data);
-            if (parsedData && parsedData.type === 'touch') {
+
+            if (parsedData.type === 'touch') {
                 circleX = parsedData.x;
                 circleY = parsedData.y;
+            } else if (parsedData.type === 'color') {
+                circleColor = [parsedData.r, parsedData.g, parsedData.b];
             }
         } catch (e) {
             console.error("Error parsing received JSON:", e);
         }
-    });    
+    });
 
-    // Evento de desconexión
     socket.on('disconnect', () => {
         console.log('Disconnected from server');
     });
@@ -42,6 +40,6 @@ function setup() {
 
 function draw() {
     background(220);
-    fill(255, 0, 0);
+    fill(circleColor[0], circleColor[1], circleColor[2]);
     ellipse(circleX, circleY, 50, 50);
 }
